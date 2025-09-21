@@ -4,7 +4,7 @@ export async function plan(llm, goal) {
         { kind: "record" },
         { kind: "script", language: "ts" },
         { kind: "advise-selectors" },
-        { kind: "run" }
+        { kind: "run" },
     ];
     return { steps, rationale };
 }

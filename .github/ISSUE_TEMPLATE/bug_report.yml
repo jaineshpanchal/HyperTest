@@ -1,0 +1,26 @@
+name: "🐞 Bug report"
+description: Report a reproducible problem
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Clear, concise description of the bug.
+      placeholder: e.g. CLI crashes when running `hypertest agent ...`
+    validations: { required: true }
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: Include commands, config, and a minimal repro if possible.
+      placeholder: 1) ..., 2) ..., 3) ...
+  - type: input
+    id: version
+    attributes:
+      label: HyperTest version / Node version
+      placeholder: hypertest@x.y.z / node v20
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs & screenshots

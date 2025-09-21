@@ -9,10 +9,15 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-and-lint:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         node-version: [18.x, 20.x, 22.x]
 
@@ -24,6 +29,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+          cache: pnpm
 
       - name: Enable Corepack
         run: corepack enable
@@ -31,8 +37,8 @@ jobs:
       - name: Use pnpm from packageManager
         run: corepack use pnpm@9
 
-      - name: Install
-        run: pnpm install
+      - name: Install (frozen lockfile)
+        run: pnpm install --frozen-lockfile
 
       - name: Lint
         run: pnpm lint

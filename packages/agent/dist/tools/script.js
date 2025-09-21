@@ -3,6 +3,6 @@ export async function toolScript(_) {
     return {
         ok: true,
         message: "Script generated (stub).",
-        artifacts: { script: "artifacts/scripts/test_login.ts", content: script }
+        artifacts: { script: "artifacts/scripts/test_login.ts", content: script },
     };
 }

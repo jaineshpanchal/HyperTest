@@ -4,6 +4,6 @@ export async function toolRun(_) {
     return {
         ok: true,
         message: "Executed suite (stub).",
-        artifacts: { report: "artifacts/reports/last.json" }
+        artifacts: { report: "artifacts/reports/last.json" },
     };
 }
