@@ -9,12 +9,8 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: ci-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
-  build-and-lint:
+  build-and-test:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -37,15 +33,41 @@ jobs:
       - name: Use pnpm from packageManager
         run: corepack use pnpm@9
 
-      - name: Install (frozen lockfile)
+      - name: Install deps
         run: pnpm install --frozen-lockfile
 
-      - name: Lint
-        run: pnpm lint
+      # Playwright needs browsers in CI
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
 
-      - name: Build
-        run: pnpm -r build
+      # Lints + builds + runs a tiny headless verify spec
+      - name: Verify (lint + build + dry-run)
+        run: pnpm verify
 
-      - name: Smoke run CLI
+      # Generate a spec and run it using artifacts config (HTML report collected)
+      - name: Agent smoke (generate + run)
+        env:
+          BASE_URL: https://example.com
         run: |
-          node packages/cli/dist/index.js agent "CI smoke: example.com"
+          node packages/cli/dist/index.js smoke "CI smoke: https://example.com" \
+            --trace=on \
+            --reporter=html \
+            --base-url="$BASE_URL"
+
+      - name: Upload Playwright HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-${{ matrix.node-version }}
+          path: playwright-report
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: Upload HyperTest artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hypertest-artifacts-${{ matrix.node-version }}
+          path: artifacts
+          if-no-files-found: ignore
+          retention-days: 7

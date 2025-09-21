@@ -4,17 +4,35 @@
   "private": true,
   "version": "0.0.0",
   "packageManager": "pnpm@9.15.9+sha512.68046141893c66fad01c079231128e9afb89ef87e2691d69e4d40eee228988295fd4682181bae55b58418c3a253bde65a505ec7c5f9403ece5cc3cd37dcf2531",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "build": "pnpm -r --filter ./packages/* run build",
     "dev": "pnpm -r --filter ./packages/* run dev",
     "typecheck": "tsc -v >/dev/null && echo \"TypeScript OK (per-package builds)\" || true",
     "lint": "eslint . --ext .ts,.js --max-warnings=0",
-    "format": "prettier . --check",
-    "format:write": "prettier . --write",
+    "lint:fix": "eslint . --ext .ts,.js --fix",
+    "format": "prettier --check .",
+    "format:write": "prettier --write .",
     "cli": "node packages/cli/dist/index.js",
-    "test": "echo \"(add tests later)\""
+    "agent": "node packages/cli/dist/index.js agent \"Create a login test for https://example.com\"",
+    "record": "node packages/cli/dist/index.js record",
+    "smoke": "node packages/cli/dist/index.js smoke",
+    "run:latest": "node packages/cli/dist/index.js run-latest",
+    "promote:latest": "node packages/cli/dist/index.js promote-latest",
+    "promote:run": "node packages/cli/dist/index.js promote-latest --run --headed --trace=on --reporter=html",
+    "test": "playwright test",
+    "test:promoted": "playwright test tests/generated.spec.ts",
+    "report": "playwright show-report",
+    "open:report": "node packages/cli/dist/index.js open-report",
+    "verify": "node packages/cli/dist/index.js verify",
+    "hypertest": "pnpm --filter @hypertest/cli exec hypertest"
   },
   "devDependencies": {
+    "@hypertest/cli": "workspace:^",
+    "@hypertest/runner-web": "workspace:*",
+    "@playwright/test": "^1.55.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^11.0.6",

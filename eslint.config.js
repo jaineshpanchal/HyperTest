@@ -1,12 +1,21 @@
-// eslint.config.js (flat config for ESLint v9)
-import tseslint from "@typescript-eslint/eslint-plugin";
+// eslint.config.js (Flat config for ESLint v9)
+import tsPlugin from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 import importPlugin from "eslint-plugin-import";
 
 export default [
+  // Ignore generated/build outputs and reports
   {
-    ignores: ["**/dist/**", "**/node_modules/**", "**/.pnpm/**"],
+    ignores: [
+      "artifacts/**",
+      "playwright-report/**",
+      "**/dist/**",
+      "**/node_modules/**",
+      "**/.pnpm/**",
+    ],
   },
+
+  // JS/TS rules
   {
     files: ["**/*.{ts,js}"],
     languageOptions: {
@@ -19,18 +28,18 @@ export default [
       },
     },
     plugins: {
-      "@typescript-eslint": tseslint,
+      "@typescript-eslint": tsPlugin,
       import: importPlugin,
     },
     rules: {
-      // Core
+      // Prefer the TS-aware unused vars rule; allow `_`-prefixed
       "no-unused-vars": "off",
-      // TS
       "@typescript-eslint/no-unused-vars": [
         "warn",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
       ],
-      // Import hygiene
+
+      // Import hygiene & readability
       "import/order": [
         "warn",
         {
@@ -42,7 +51,8 @@ export default [
           ],
         },
       ],
-      "import/no-unresolved": "off", // handled by TS + workspaces
+      // Workspaces + TS handle resolution
+      "import/no-unresolved": "off",
     },
   },
 ];

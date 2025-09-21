@@ -1,10 +1,14 @@
-export async function plan(llm, goal) {
-    const rationale = await llm.generate(`Create a step-by-step test plan for: ${goal.prompt}. Target: ${goal.target ?? "web"}.`);
-    const steps = [
-        { kind: "record" },
-        { kind: "script", language: "ts" },
-        { kind: "advise-selectors" },
-        { kind: "run" },
-    ];
-    return { steps, rationale };
+/**
+ * Minimal planner:
+ *  - Only generate a Playwright script (TypeScript).
+ *  - Running is done by the CLI (`hypertest smoke` or `hypertest run-latest`).
+ */
+export async function plan(_llm, input) {
+    const plan = {
+        steps: [
+            // `suite` and `goal` are carried through to the script tool
+            { kind: "script", suite: "HyperTest generated: smoke", goal: input.prompt, language: "ts" }
+        ]
+    };
+    return plan;
 }
