@@ -1,0 +1,1 @@
+{"version":3,"file":"llm.d.ts","sourceRoot":"","sources":["../../src/providers/llm.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,GAAG;IAClB,QAAQ,CAAC,KAAK,EAAE,MAAM,GAAG,OAAO,CAAC,MAAM,CAAC,CAAC;CAC1C;AAED,qBAAa,OAAQ,YAAW,GAAG;IAC3B,QAAQ,CAAC,KAAK,EAAE,MAAM,GAAG,OAAO,CAAC,MAAM,CAAC;CAS/C"}

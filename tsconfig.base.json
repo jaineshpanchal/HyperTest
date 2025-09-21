@@ -1,5 +1,5 @@
 {
-    "compilerOptions": {
+  "compilerOptions": {
     "target": "ES2022",
     "module": "ES2022",
     "moduleResolution": "Bundler",
@@ -9,7 +9,7 @@
     "forceConsistentCasingInFileNames": true,
 
     "declaration": true,
-    "declarationMap": true,     // optional, helps debugging .d.ts
+    "declarationMap": true, // optional, helps debugging .d.ts
     "emitDeclarationOnly": false
-    }
+  }
 }

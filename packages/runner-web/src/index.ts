@@ -1,6 +1,6 @@
 export const runner = {
-    name: "web",
-    init() {
+  name: "web",
+  init() {
     console.log("[runner-web] bootstrap");
-    }
+  },
 };
