@@ -8,4 +8,3 @@ export declare function byStable(page: Page, hint: string): Locator;
 export declare const sel: {
     stable: typeof byStable;
 };
-//# sourceMappingURL=selectors.d.ts.map

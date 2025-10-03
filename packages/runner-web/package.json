@@ -2,37 +2,23 @@
   "name": "@hypertest/runner-web",
   "version": "0.0.0",
   "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    }
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "peerDependencies": {
+    "@playwright/test": "^1.47.0"
   },
-  "files": [
-    "dist"
-  ],
-  "sideEffects": false,
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "dev": "tsc -w -p tsconfig.json",
-    "clean": "rimraf dist"
-  },
-  "peerDependencies": {
-    "@playwright/test": ">=1.44.0"
-  },
-  "peerDependenciesMeta": {
-    "@playwright/test": {
-      "optional": true
-    }
+    "clean": "rimraf dist",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "devDependencies": {
-    "rimraf": "^6.0.1",
-    "typescript": "^5.6.0"
-  },
-  "engines": {
-    "node": ">=18"
+    "typescript": "^5.6.3",
+    "@types/node": "^20.14.9",
+    "eslint": "^9.9.0",
+    "@typescript-eslint/eslint-plugin": "^8.5.0",
+    "@typescript-eslint/parser": "^8.5.0",
+    "rimraf": "^6.0.1"
   }
 }
