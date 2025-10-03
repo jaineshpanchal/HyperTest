@@ -1,15 +1,30 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "ES2022",
+    "module": "ESNext",
     "moduleResolution": "Bundler",
     "strict": true,
+    "declaration": true,
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-
-    "declaration": true,
-    "declarationMap": true, // optional, helps debugging .d.ts
-    "emitDeclarationOnly": false
+    "types": [
+      "node"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@hypertest/core": [
+        "packages/core/src"
+      ],
+      "@hypertest/runner-web": [
+        "packages/runner-web/src"
+      ],
+      "@hypertest/cli": [
+        "packages/cli/src"
+      ],
+      "@hypertest/selector": [
+        "packages/selector/src"
+      ]
+    }
   }
 }

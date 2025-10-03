@@ -1,0 +1,14 @@
+{
+  "name": "@hypertest/recorder",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "dist/inject.js",
+  "types": "dist/inject.d.ts",
+  "exports": { ".": { "types": "./dist/inject.d.ts", "import": "./dist/inject.js" } },
+  "scripts": { "build": "tsc -p tsconfig.json", "clean": "rimraf dist" },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "@types/node": "^20.14.9",
+    "rimraf": "^6.0.1"
+  }
+}
